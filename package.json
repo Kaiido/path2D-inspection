@@ -1,0 +1,33 @@
+{
+  "name": "Path2D-inspection",
+  "version": "0.0.1",
+  "description": "Prototyping of possible enhancements to the WHATWG Path2D interface.",
+  "keywords": [
+    "canvas",
+    "transform",
+    "path-data"
+  ],
+  "license": "MIT",
+  "repository": "Kaiido/path2D-inspection",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --ext mjs,js",
+    "test": "npm run lint && nyc mocha 'test/*/*.js'",
+    "covreport": "nyc report --reporter html && nyc report --reporter lcov",
+    "build": "rollup --config"
+  },
+  "files": [
+    "/source/path2D-inspection.mjs"
+  ],
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "jest": "^27.5.1",
+    "mocha": "^9.1.0",
+    "nyc": "^15.0.1",
+    "rollup": "^2.34.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "svg-path-bbox": "^1.0.2"
+  }
+}

@@ -1,0 +1,1 @@
+# Shamelessly copied from [https://github.com/icons8/svg-path-bounding-box/](https://github.com/icons8/svg-path-bounding-box/)
