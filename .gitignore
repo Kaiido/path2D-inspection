@@ -129,3 +129,4 @@ dist
 .DS_store
 manual-tests.html
 package-lock.json
+rollup.config.js
