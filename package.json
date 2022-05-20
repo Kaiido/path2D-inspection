@@ -17,7 +17,8 @@
     "build": "rollup --config"
   },
   "files": [
-    "/source/path2D-inspection.mjs"
+    "/build/",
+    "/source/**/*.mjs"
   ],
   "devDependencies": {
     "eslint": "^8.5.0",

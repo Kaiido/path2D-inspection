@@ -1,7 +1,7 @@
 import PathData from "./pathdata/pathdata.mjs";
 import getBBox from "./externals/bbox/getBBox.mjs";
 import { consumers } from "./consumers.mjs";
-const Original = globalThis.Path2D;
+let Original = globalThis.Path2D;
 const path2DMap = new WeakMap();
 const pathDataMap = new WeakMap();
 const currentPathSymbol = Symbol("currentPath");
@@ -38,6 +38,7 @@ if (typeof Original.prototype.getPathData !== "function") {
     get [Symbol.toStringTag]() {
       return "Path2D";
     }
+    static __Path2D = Original;
   }
   for (const key of Object.keys(Original.prototype)) {
     Path2D.prototype[key] = function (...args) {
@@ -68,5 +69,8 @@ if (typeof Original.prototype.getPathData !== "function") {
       };
     }
   }
+}
+else {
+  Original = Original.__Path2D;
 }
 export { Original };

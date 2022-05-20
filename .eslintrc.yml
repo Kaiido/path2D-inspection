@@ -9,7 +9,7 @@ ignorePatterns:
 
 parserOptions:
   sourceType: "module"
-  ecmaVersion: 2020
+  ecmaVersion: "latest"
 
 settings:
   import/extensions: [ ".mjs", ".js" ]

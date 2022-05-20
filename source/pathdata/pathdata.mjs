@@ -1,6 +1,6 @@
 // internal use only
 import * as geom from "../geometry/geometry.mjs";
-import SvgPath from "../externals/svgpath/index.js";
+import SvgPath from "../externals/svgpath/index.mjs";
 import { PathSegment } from "./pathsegment.mjs";
 
 const SVGPathData_commands = {

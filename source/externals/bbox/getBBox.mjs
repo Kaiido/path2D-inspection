@@ -1,4 +1,4 @@
-import SvgPath from "../../externals/svgpath/index.js";
+import SvgPath from "../svgpath/index.mjs";
 import BoundingBox from "./BoundingBox.mjs";
 
 export default function getBBox(d) {

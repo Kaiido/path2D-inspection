@@ -9,7 +9,7 @@ Example
 -------
 
 ```js
-import SvgPath from "/svgpath/index.js";
+import SvgPath from "/svgpath/index.mjs";
 
 var commands = svgpath(__your_path__)
   .toAbs()

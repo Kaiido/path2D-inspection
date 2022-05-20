@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import svgpath from '../index.js';
+import svgpath from '../index.mjs';
 
 describe('Path parse', function () {
 

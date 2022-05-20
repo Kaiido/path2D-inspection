@@ -5,8 +5,8 @@
 //    SvgPath('...')
 //      .toString()
 //
-import pathParse from './path_parse.js';
-import a2c from './a2c.js';
+import pathParse from './path_parse.mjs';
+import a2c from './a2c.mjs';
 
 
 // Class constructor

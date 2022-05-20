@@ -19,10 +19,10 @@
     "test": "npm run lint && nyc mocha",
     "covreport": "nyc report --reporter html && nyc report --reporter lcov",
     "benchmark": "benchmark/benchmark.js",
-    "benchmark-prepare": "mkdir -p benchmark/implementations/2.4.1 && git checkout 2.4.1 && cp index.js benchmark/implementations/2.4.1 && cp -R --parents **/*.js benchmark/implementations/2.4.1 && git checkout master"
+    "benchmark-prepare": "mkdir -p benchmark/implementations/2.4.1 && git checkout 2.4.1 && cp index.mjs benchmark/implementations/2.4.1 && cp -R --parents **/*.*js benchmark/implementations/2.4.1 && git checkout master"
   },
   "files": [
-    "index.js",
+    "index.mjs",
     "index.d.ts",
     "lib/"
   ],

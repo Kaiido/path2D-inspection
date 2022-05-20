@@ -1,2 +1,2 @@
-import SvgPath from '../../../index.js';
+import SvgPath from '../../../index.mjs';
 export default SvgPath;

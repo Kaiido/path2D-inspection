@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import svgpath from '../index.js';
+import svgpath from '../index.mjs';
 
 function roundPath(path, d) {
   var contourStartDeltaX = 0, contourStartDeltaY = 0, deltaX = 0, deltaY = 0, l;
