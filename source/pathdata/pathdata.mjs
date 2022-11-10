@@ -2,6 +2,7 @@
 import * as geom from "../geometry/geometry.mjs";
 import SvgPath from "../externals/svgpath/index.mjs";
 import { PathSegment } from "./pathsegment.mjs";
+import { internalPathDataSymbol } from "../utils.mjs";
 
 const SVGPathData_commands = {
   Z: (instance) =>
@@ -71,7 +72,7 @@ class PathData extends Array {
     }
   }
   addPath(path, mat) {
-    const pathdata = path.getPathData();
+    const pathdata = path[internalPathDataSymbol];
     for (let seg of pathdata) {
       this.push(seg.transform(mat));
     }

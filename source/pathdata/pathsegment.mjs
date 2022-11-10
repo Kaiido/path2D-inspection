@@ -13,14 +13,14 @@ const pointsMap = {
 export class PathSegment {
   constructor(type, values = []) {
     this.type = type;
-    this.values = values;
+    this.values = values.slice();
   }
   stringify() {
     return this.type + this.values.join(" ");
   }
   toExternal() {
     const { type, values } = this;
-    return { type, values };
+    return { type, values: values.slice() };
   }
   transformSelf(mat) {
     return transformSegment(this, mat, this);
@@ -34,7 +34,7 @@ export class PathSegment {
 function transformSegment(source, mat, target) {
   const { values, type } = source;
   if (!target) {
-    target = new PathSegment(type, values.slice());
+    target = new PathSegment(type, values);
   }
   if (!(mat instanceof DOMMatrix)) {
     return target;

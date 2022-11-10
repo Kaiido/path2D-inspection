@@ -1,6 +1,7 @@
 import PathData from "./pathdata/pathdata.mjs";
 import getBBox from "./externals/bbox/getBBox.mjs";
 import { consumers } from "./consumers.mjs";
+import { currentPathSymbol, internalPathDataSymbol } from "./utils.mjs";
 import {
   svgPathProperties as PathProperties
 } from "../node_modules/svg-path-properties/dist/svg-path-properties.esm.js";
@@ -8,9 +9,7 @@ import {
 let Original = globalThis.Path2D;
 const path2DMap = new WeakMap();
 const pathDataMap = new WeakMap();
-const currentPathSymbol = Symbol("currentPath");
 const noLengthSegments = new Set([ "Z", "M" ]);
-
 
 if (typeof Original.prototype.getPathData !== "function") {
   class Path2D {
@@ -21,7 +20,7 @@ if (typeof Original.prototype.getPathData !== "function") {
       pathDataMap.set(this, new PathData(...mappedArgs));
     }
     getPathData() {
-      return pathDataMap.get(this);
+      return pathDataMap.get(this).toExternal();
     }
     setPathData(segments) {
       path2DMap.delete(this);
@@ -68,6 +67,9 @@ if (typeof Original.prototype.getPathData !== "function") {
         path2DMap.set(this, path);
       }
       return path;
+    }
+    get [internalPathDataSymbol]() {
+      return pathDataMap.get(this);
     }
     get [Symbol.toStringTag]() {
       return "Path2D";

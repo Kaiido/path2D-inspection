@@ -12,6 +12,9 @@ function almostEqual(floata, floatb) {
   return abs(floata - floatb) < epsilon;
 }
 
+const currentPathSymbol = Symbol("currentPath");
+const internalPathDataSymbol = Symbol("pathData");
+
 export {
   tau,
   abs,
@@ -19,5 +22,7 @@ export {
   rad,
   epsilon,
   allAreFinite,
-  almostEqual
+  almostEqual,
+  currentPathSymbol,
+  internalPathDataSymbol
 };

@@ -16,14 +16,14 @@
   class PathSegment {
     constructor(type, values = []) {
       this.type = type;
-      this.values = values;
+      this.values = values.slice();
     }
     stringify() {
       return this.type + this.values.join(" ");
     }
     toExternal() {
       const { type, values } = this;
-      return { type, values };
+      return { type, values: values.slice() };
     }
     transformSelf(mat) {
       return transformSegment(this, mat, this);
@@ -37,7 +37,7 @@
   function transformSegment(source, mat, target) {
     const { values, type } = source;
     if (!target) {
-      target = new PathSegment(type, values.slice());
+      target = new PathSegment(type, values);
     }
     if (!(mat instanceof DOMMatrix)) {
       return target;
@@ -71,6 +71,9 @@
     // using d3.js's "epsilon" instead of CanvasKit's 1e-5
     return abs(floata - floatb) < epsilon;
   }
+
+  const currentPathSymbol = Symbol("currentPath");
+  const internalPathDataSymbol = Symbol("pathData");
 
   function lineTo(x, y) {
 
@@ -1646,7 +1649,7 @@
       }
     }
     addPath(path, mat) {
-      const pathdata = path.getPathData();
+      const pathdata = path[internalPathDataSymbol];
       for (let seg of pathdata) {
         this.push(seg.transform(mat));
       }
@@ -1865,9 +1868,7 @@
   let Original = globalThis.Path2D;
   const path2DMap = new WeakMap();
   const pathDataMap = new WeakMap();
-  const currentPathSymbol = Symbol("currentPath");
   const noLengthSegments = new Set([ "Z", "M" ]);
-
 
   if (typeof Original.prototype.getPathData !== "function") {
     class Path2D {
@@ -1878,7 +1879,7 @@
         pathDataMap.set(this, new PathData(...mappedArgs));
       }
       getPathData() {
-        return pathDataMap.get(this);
+        return pathDataMap.get(this).toExternal();
       }
       setPathData(segments) {
         path2DMap.delete(this);
@@ -1925,6 +1926,9 @@
           path2DMap.set(this, path);
         }
         return path;
+      }
+      get [internalPathDataSymbol]() {
+        return pathDataMap.get(this);
       }
       get [Symbol.toStringTag]() {
         return "Path2D";
