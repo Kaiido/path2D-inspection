@@ -21,7 +21,7 @@ const def = path.toSVGString();
 *Beware, `new Path2D(svgString).toSVGString()` doesn't necessarily match `svgString`.*
 
 
-### `Path2D.prototype.getBBox()` Returns the bounding box of the Path2D object.
+### `Path2D.prototype.getBBox()` Returns a [`DOMRect`](https://developer.mozilla.org/en-US/docs/Web/API/DOMRect) representing the bounding box of the path.
 ```js
 const box = path.getBBox();
 /*
@@ -36,7 +36,7 @@ const box = path.getBBox();
  */
 ```
 
-### `Path2D.prototype.getPathData()` Returns an Array of [SVGPathSegments](https://www.w3.org/TR/svg-paths/#InterfaceSVGPathSegment).
+### `Path2D.prototype.getPathData()` Returns an `Array` of [SVGPathSegments](https://www.w3.org/TR/svg-paths/#InterfaceSVGPathSegment).
 
 *Note that unlike in SVG this method doesn't accept the `normalize` option. Path2D always uses absolute commands.*  
 ```js
@@ -60,7 +60,7 @@ const segments = path.getPathData();
  */
 ```
 
-### `Path2D.prototype.setPathData(sequence<SVGPathSegment>)` set the Path2D segments to the passed ones.
+### `Path2D.prototype.setPathData(sequence<SVGPathSegment> pathData)` Sets the path's segments to `pathData`.
 
 ```js
 path.setPathData([
@@ -82,11 +82,15 @@ path.setPathData([
 ctx.stroke(path); // draws a line from 0,0 to 10,10
 ```
 
-## Planned additions:
+### `Path2D.prototype.getTotalLength()` Returns the total length of the path.
 
-- `Path2D.prototype.getTotalLength()`
-- `Path2D.prototype.getPointAtLength()`
-- `Path2D.prototype.getPathSegmentAtLength()`
+```js
+const length = path.getTotalLength(); // 14.142135623730951
+```
+
+### `Path2D.prototype.getPointAtLength(float distance)` Returns a [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) representing the point at the given `distance` along the path.
+
+### `Path2D.prototype.getPathSegmentAtLength(float distance)`
 
 ## Can I use this in my own project?
 

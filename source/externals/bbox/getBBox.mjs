@@ -52,13 +52,10 @@ export default function getBBox(d) {
     });
 
   const { x1, y1, x2, y2 } = boundingBox;
+  const left   = Math.min(x1, x2);
+  const top    = Math.min(y1, y2);
+  const width  = Math.abs(x1 - x2);
+  const height = Math.abs(y1 - y2);
 
-  return {
-    left:   Math.min(x1, x2),
-    top:    Math.min(y1, y2),
-    right:  Math.max(x1, x2),
-    bottom: Math.max(y1, y2),
-    width:  Math.abs(x1 - x2),
-    height: Math.abs(y1 - y2)
-  };
+  return new DOMRect(left, top, width, height);
 }

@@ -27,5 +27,8 @@
     "nyc": "^15.0.1",
     "rollup": "^2.34.0",
     "rollup-plugin-terser": "^7.0.2"
+  },
+  "dependencies": {
+    "svg-path-properties": "^1.0.11"
   }
 }
