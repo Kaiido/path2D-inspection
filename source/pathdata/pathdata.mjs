@@ -10,6 +10,10 @@ const SVGPathData_commands = {
     instance.moveTo(...params),
   L: (instance, params) =>
     instance.lineTo(...params),
+  H: (instance, [ x, ...extraParams ]) =>
+    instance.lineTo(x, instance.lastPoint.y, ...extraParams),
+  V: (instance, params) =>
+    instance.lineTo(instance.lastPoint.x, ...params),
   C: (instance, params) =>
     instance.bezierCurveTo(...params),
   Q: (instance, params) =>

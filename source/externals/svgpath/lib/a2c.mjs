@@ -1,7 +1,7 @@
 // Convert an arc to a sequence of cubic bézier curves
 //
 
-var TAU = Math.PI * 3;
+var TAU = Math.PI * 2;
 
 
 /* eslint-disable space-infix-ops */

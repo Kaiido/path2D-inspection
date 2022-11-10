@@ -1080,7 +1080,7 @@
   // Convert an arc to a sequence of cubic bézier curves
   //
 
-  var TAU = Math.PI * 3;
+  var TAU = Math.PI * 2;
 
 
   /* eslint-disable space-infix-ops */
@@ -1585,6 +1585,10 @@
       instance.moveTo(...params),
     L: (instance, params) =>
       instance.lineTo(...params),
+    H: (instance, [ x, ...extraParams ]) =>
+      instance.lineTo(x, instance.lastPoint.y, ...extraParams),
+    V: (instance, params) =>
+      instance.lineTo(instance.lastPoint.x, ...params),
     C: (instance, params) =>
       instance.bezierCurveTo(...params),
     Q: (instance, params) =>
