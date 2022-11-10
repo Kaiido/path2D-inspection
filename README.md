@@ -94,7 +94,7 @@ const length = path.getTotalLength(); // 14.142135623730951
 const pt = path.getPointAtLength(Math.hypot(5, 5)); // [DOMPoint] { x: 5, y: 5, z: 0, w: 1}
 ```
 
-### `Path2D.prototype.getPathSegmentAtLength(float distance)` Return the SVGPathSegment at the given `distance` along the path.
+### `Path2D.prototype.getPathSegmentAtLength(float distance)` Returns the SVGPathSegment at the given `distance` along the path.
 
 ```js
 const seg = path.getPathSegentAtLength(Math.hypot(5, 5));
