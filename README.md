@@ -90,7 +90,16 @@ const length = path.getTotalLength(); // 14.142135623730951
 
 ### `Path2D.prototype.getPointAtLength(float distance)` Returns a [DOMPoint](https://developer.mozilla.org/en-US/docs/Web/API/DOMPoint) representing the point at the given `distance` along the path.
 
-### `Path2D.prototype.getPathSegmentAtLength(float distance)`
+```js
+const pt = path.getPointAtLength(Math.hypot(5, 5)); // [DOMPoint] { x: 5, y: 5, z: 0, w: 1}
+```
+
+### `Path2D.prototype.getPathSegmentAtLength(float distance)` Return the SVGPathSegment at the given `distance` along the path.
+
+```js
+const seg = path.getPathSegentAtLength(Math.hypot(5, 5));
+            // { type: "L", values: [ 10, 10 ] }
+```
 
 ## Can I use this in my own project?
 
