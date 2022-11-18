@@ -72,7 +72,11 @@ class PathData extends Array {
     }
   }
   addPath(path, mat) {
-    const pathdata = path[internalPathDataSymbol];
+    // See #1
+    // new Path2D(<SVG-string>) will decompose Arcs to bezier curves
+    // This allows us to workaround an issue transforming Arcs
+    const decomposed = new Path2D(path.toSVGString());
+    const pathdata = decomposed[internalPathDataSymbol];
     for (let seg of pathdata) {
       this.push(seg.transform(mat));
     }

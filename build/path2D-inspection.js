@@ -7,7 +7,7 @@
     Z: [],
     L: [ { x: 0, y: 1 } ],
     M: [ { x: 0, y: 1 } ],
-    A: [ { x: 0, y: 1 }, { x: 5, y: 6 } ],
+    A: [ { x: 0, y: 1 }, { x: 5, y: 6 } ], // Doesn't work
     C: [ { x: 0, y: 1 }, { x: 2, y: 3 }, { x: 4, y: 5 } ],
     Q: [ { x: 0, y: 1 }, { x: 2, y: 3 } ]
   };
@@ -1649,7 +1649,11 @@
       }
     }
     addPath(path, mat) {
-      const pathdata = path[internalPathDataSymbol];
+      // See #1
+      // new Path2D(<SVG-string>) will decompose Arcs to bezier curves
+      // This allows us to workaround an issue transforming Arcs
+      const decomposed = new Path2D(path.toSVGString());
+      const pathdata = decomposed[internalPathDataSymbol];
       for (let seg of pathdata) {
         this.push(seg.transform(mat));
       }
