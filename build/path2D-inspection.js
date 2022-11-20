@@ -75,6 +75,30 @@
   const currentPathSymbol = Symbol("currentPath");
   const internalPathDataSymbol = Symbol("pathData");
 
+  // DOMMatrix.fromMatrix() will validate and fixup the dict
+  // By extracting only the 2D properties we actually end up with
+  // a validate and fixup 2D dict.
+  // The error message will say fromMatrix instead of addPath, but that's ok.
+  function createDOMMatrixFrom2DInit(val) {
+    if (!val || typeof val !== "object") {
+      return new DOMMatrix();
+    }
+    const {
+      a, b, c, d, e, f,
+      m11, m12, m21, m22, m41, m42
+    } = val;
+    const dict2D = {
+      is2D: true,
+      a, b, c, d, e, f,
+      m11, m12, m21, m22, m41, m42
+    };
+    return DOMMatrix.fromMatrix(dict2D);
+  }
+  function isValid2DDOMMatrix(mat) {
+    return [ "m11", "m12", "m21", "m22", "m41", "m42" ]
+      .every((key) => Number.isFinite(mat[key]));
+  }
+
   function lineTo(x, y) {
 
     if (this.isEmpty()) {
@@ -1649,13 +1673,22 @@
       }
     }
     addPath(path, mat) {
+      if (typeof mat !== "object" && mat !== undefined) {
+        throw new TypeError("Path2D.addPath: Argument 2 can't be converted to a dictionary.");
+      }
+      // https://drafts.fxtf.org/geometry/#create-a-dommatrix-from-the-2d-dictionary
+      const matrix = createDOMMatrixFrom2DInit(mat);
+      // https://html.spec.whatwg.org/multipage/canvas.html#dom-path2d-addpath (step 3)
+      if (!isValid2DDOMMatrix(matrix)) {
+        return;
+      }
       // See #1
       // new Path2D(<SVG-string>) will decompose Arcs to bezier curves
       // This allows us to workaround an issue transforming Arcs
       const decomposed = new Path2D(path.toSVGString());
       const pathdata = decomposed[internalPathDataSymbol];
       for (let seg of pathdata) {
-        this.push(seg.transform(mat));
+        this.push(seg.transform(matrix));
       }
     }
     getPathData() {
