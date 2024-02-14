@@ -111,4 +111,5 @@ But if you're not afraid and want to see if this can be useful then please do so
 ## Credits
 
 We want to thank Vitaly Puzrin and all the contributors of https://github.com/fontello/svgpath for their awesome SVG path data parser.  
-We also thank the authors of https://github.com/icons8/svg-path-bounding-box who saved us a few hours of work.
+We also thank the authors of https://github.com/icons8/svg-path-bounding-box who saved us a few hours of work.  
+And a big thanks to the authors of https://github.com/rveciana/svg-path-properties that we use to measure the path lengths.
